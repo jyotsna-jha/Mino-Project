@@ -21,6 +21,7 @@ L.Routing.control({
     profile:'bike',
 }).addTo(map);
 
+
 // Add markers for myLoc and destLoc
 L.marker(myLoc).addTo(map).bindPopup('Source Location');
 L.marker(destLoc).addTo(map).bindPopup('Destination Location');

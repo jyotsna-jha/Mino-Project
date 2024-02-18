@@ -93,9 +93,9 @@ def Get_Stations_on_Route(request, routenumber):
         station_ids = [item['station_info'] for item in json_data]
 
         # Fetch additional fields from StationInfo model
-        query_set = StationInfo.objects.filter(id__in=station_ids).values(
+        query_set = list(StationInfo.objects.filter(id__in=station_ids).values(
             'station_id', 'station_english_name', 'station_latitude', 'station_longitude'
-        )
+        ))
         
         context = {
             "stations_variable": query_set
@@ -106,6 +106,13 @@ def Get_Stations_on_Route(request, routenumber):
         }
 
     return render(request, 'home2.html', context)
+
+
+
+
+
+
+
 
 
 def Post_GPS_Location(request, deviceid, latitude, longitude):

@@ -106,19 +106,39 @@
 <!-- Your existing code for displaying location information -->
 
 <!-- Use json_script to safely output Python variables as JSON in a script tag -->
-{{ my_location_lat_long|json_script:"myLoc" }}
-{{ nearest_user_station_lat_long|json_script:"nearestMyLoc" }}
-{{ nearest_dest_station_lat_long|json_script:"nearestDestLoc" }}
-{{ dest_location_lat_long|json_script:"destLoc" }}
-{{ stations|json_script:"stationData" }}
- 
 
-<script src="{% static 'js/1_outputMenu.js' %}"></script>
+{{ stations|json_script:"stationData" }}
+{{ stations_variable|json_script:"stationinfo-json"}}
+
+
+
 <script src="{% static 'js/2_loadmap.js' %}"></script>
 <script src="{% static 'js/3_myLocation.js' %}"></script>
 <script src="{% static 'js/4_routing.js' %}"></script>
-<script src="{% static 'js/dummy1.js' %}"></script>
-<script src="{% static 'js/5_userform.js' %}"></script>
+
+
+<script>
+    // Parse the JSON data from the script
+    var stationInfoData = JSON.parse(document.getElementById('stationinfo-json').textContent);
+
+        // Define a custom icon
+        var customIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',  // Replace with the path to your custom marker image
+            iconSize: [20, 20],  // Adjust the size of your custom marker image
+            iconAnchor: [10, 10],
+            popupAnchor: [0, -10]
+        });
+ 
+    // Loop through the station data and add markers to the map with the custom icon
+    stationInfoData.forEach(function(station) {
+        if (station.station_english_name !== 'Route Point') {
+            var marker = L.marker([station.station_latitude, station.station_longitude], { icon: customIcon }).addTo(map);
+            marker.bindPopup('<b>' + station.station_english_name + '</b><br>Station ID: ' + station.station_id);
+        }
+    });
+    
+</script>
+
 
 
 <script>

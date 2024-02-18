@@ -36,7 +36,6 @@ def get_number_of_active_buses_in_particularRoute(requests):
 
 
 
-
 class RealTimeUpdateAV(APIView):
     def post(self, request):
         try:

@@ -28,9 +28,9 @@
 
     #search-bar {
         position: fixed;
-        top: 10px;
+        top: 330px;
         right: 10px;
-        background: none;
+        background: white;
         padding: 10px;
         z-index: 1000;
     }
@@ -97,7 +97,12 @@
         <div id="hello-world-card">
             <p>Public Transport Assistant</p>
         </div>
-    </div>  
+    </div> 
+    
+    <!--This form is handled by : 5_userform.js-->
+    <div id="search-bar" class="w3-card w3-round-large">
+        <p class="w3-text-black">Total Price to Travel : Rs.20 </p>
+    </div>
 
 </div>
 
@@ -110,7 +115,7 @@
 {{ nearest_dest_station_lat_long|json_script:"nearestDestLoc" }}
 {{ dest_location_lat_long|json_script:"destLoc" }}
 {{ stations|json_script:"stationData" }}
- 
+  
 
 <script src="{% static 'js/1_outputMenu.js' %}"></script>
 <script src="{% static 'js/2_loadmap.js' %}"></script>

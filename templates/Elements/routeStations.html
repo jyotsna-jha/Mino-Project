@@ -1,4 +1,4 @@
-<style>
+<style> 
     .station-card {
         border: 1px solid #ccc;
         padding: 10px;
@@ -14,14 +14,12 @@
 </style>
 
 {% for station in stations_variable %}
-    <div class="station-card">
-        <p>
-            {{ loop.index }} {{ station.station_id }} {{ station.station_english_name }}<br>
-        </p>
-        {{ station.station_latitude|json_script:"latitude" }}
-        {{ station.station_longitude|json_script:"longitude"}}
-        <script>
-            L.marker([{{ station.station_latitude }}, {{ station.station_longitude }}]).addTo(map).bindPopup('{{ station.station_english_name }}');
-        </script>
-    </div>
+    {% if station.station_english_name != 'Route Point' %}
+        <div class="station-card">
+            {{ station.station_english_name }} 
+        </div>
+    {% endif %}
 {% endfor %}
+
+
+
